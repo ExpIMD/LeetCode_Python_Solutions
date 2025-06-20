@@ -86,6 +86,12 @@ def binary_search(lst: list[object], target: object) -> int:
     return -1 # Returns the index in the list where the target would theoretically be positioned 
 
 def sign(number: int) -> int:
+    """
+    Sign math function  
+    If the number is positive, it returns 1     
+    If the number is negative, it returns -1    
+    Otherwise, it returns 0
+    """
     if number > 0:
         return 1
     elif number < 0:
@@ -95,7 +101,26 @@ def sign(number: int) -> int:
 
 def reversed(number: int) -> int:
     """
-    Given an interger %number%
+    Given an interger %number%  
     Returns the reversed number
     """
     return sign(number)*int(str(abs(number))[::-1])
+
+def last_word_length(line: str) -> int:
+    """
+    Given a string %line%   
+    Returns the length of the last word in %line%
+    """
+    end: int = len(line) - 1
+
+    while end >= 0 and line[end] == " ":
+        end -= 1
+
+    start = end
+    # Instead of using a variable length, we declare start to avoid unnecessary calculations
+        
+    while start >= 0 and line[start] != " ":
+        start -= 1
+
+    return end - start # Using split is inefficient because this method processes the entire string, not just its last word
+    # return len(line.split()[-1])
