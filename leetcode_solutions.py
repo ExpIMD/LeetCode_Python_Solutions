@@ -84,3 +84,18 @@ def binary_search(lst: list[object], target: object) -> int:
         else:
             return middle # Found target
     return -1 # Returns the index in the list where the target would theoretically be positioned 
+
+def sign(number: int) -> int:
+    if number > 0:
+        return 1
+    elif number < 0:
+        return -1
+    else:
+        return 0
+
+def reversed(number: int) -> int:
+    """
+    Given an interger %number%
+    Returns the reversed number
+    """
+    return sign(number)*int(str(abs(number))[::-1])
