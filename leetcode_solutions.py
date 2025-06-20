@@ -53,3 +53,34 @@ def search_insert_position(lst: list[object], target: object) -> int:
         else:
             return middle # Found target
     return left # Returns the index in the list where the target would theoretically be positioned 
+
+
+def binary_search(lst: list[object], target: object) -> int:
+    """
+    Description:
+        Given a sorted list %lst% and a value %target%
+        Returns the index of %target% in %lst% if it exists
+        Otherwise, returns -1
+
+    Note:
+        The objects in %lst% and %target% must support the '<' operator.
+    """
+    left: int = 0
+    right: int = len(lst)
+    # left and right are pointers to elements in the vector on both sides
+
+    while left < right: # We will consider the range [left; right)
+        # Using an open interval is not necessary, since Python integers do not overflow
+        # We can safely use either while 'left < right' with 'right = middle' or while 'left <= right' with 'right = middle - 1'
+
+        middle: int = (left + right) // 2
+
+        # For convenience, only the operator<() will be used
+		# We shift the left and right pointers
+        if lst[middle] < target:
+            left = middle + 1
+        elif target < lst[middle]:
+            right = middle
+        else:
+            return middle # Found target
+    return -1 # Returns the index in the list where the target would theoretically be positioned 
