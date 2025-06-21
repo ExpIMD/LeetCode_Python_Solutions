@@ -169,6 +169,45 @@ def majority_element(collection: typing.Iterable[object]) -> object:
     return None
 
 def is_palindrome(number: int) -> bool:
+    """
+    Description:
+        Given an integer <number>
+        Checks if the <number> is a palindrome
+    """
     if number < 0: return False
     return reversed(number) == number
 
+def is_palindrome(line: str) -> bool:
+    """
+    Description:
+        Given a string <line>
+        Checks if the <line> is a palindrome
+    """
+
+    if not line: # We will consider the empty string as a palindrome
+        return True
+
+    left, right = 0, len(line) - 1 # Initialize two pointers: one at the start and one at the end of the string
+
+    while left < right:
+        if not line[left].isalnum(): # If the character at 'left' is not alphanumeric, skip it
+            left += 1
+            continue
+        if not line[right].isalnum(): # If the character at 'right' is not alphanumeric, skip it
+            right -= 1
+            continue
+        if line[left].lower() != line[right].lower(): # Characters do not match, not a palindrome
+            return False
+        # Characters match; move inward towards the center
+        left += 1
+        right -= 1
+
+    return True
+
+    """
+    This solution is the shortest, but not efficient in terms of time or memory.
+    
+    filtered = "".join(ch.lower() for ch in s if ch.isalnum())
+    return filtered == filtered[::-1]
+
+    """
