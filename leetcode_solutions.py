@@ -1,3 +1,5 @@
+import typing
+
 def two_sum(numbers: list[int], target: int) -> tuple[int, int]:
     """
     Description:
@@ -124,3 +126,49 @@ def last_word_length(line: str) -> int:
 
     return end - start # Using split is inefficient because this method processes the entire string, not just its last word
     # return len(line.split()[-1])
+
+
+def Boyer_Moore_vote_algorithm(collection: typing.Iterable[object]) -> object:
+    """
+    Given a collection <col>
+    Returns the element that occurs more than half of the time in the collection (the majority element)
+    If there is no majority element, a random element is returned
+    """
+
+    """
+    It works by maintaining a candidate and a counter:
+    it increments the counter when the current element matches the candidate, decrements otherwise,
+    and resets the candidate when the counter reaches zero.
+    After one pass, the candidate is the majority element if one exists.
+    """
+    candidate: object = None
+    frequence: int = 0
+    for x in collection:
+        if frequence == 0:
+            candidate = x
+        if x == candidate:
+            frequence += 1
+        else:
+            frequence -= 1
+    return candidate
+
+def majority_element(collection: typing.Iterable[object]) -> object:
+    """
+    Given a collection <collection>
+    Returns the element that occurs more than half of the time in the collection (the majority element)
+    If there is no majority element, returns None
+    """
+    mapping = {}
+    times: int = len(collection) / 2
+
+    for x in collection:
+        mapping[x] += 1
+        if mapping[x] > times:
+            return x
+        
+    return None
+
+def is_palindrome(number: int) -> bool:
+    if number < 0: return False
+    return reversed(number) == number
+
