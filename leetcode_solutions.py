@@ -248,3 +248,13 @@ def get_Pascal_triangle_row(row_index: int) -> list[int]:
         for j in range(i, 0, -1):
             row[j] += row[j-1]
     return row
+
+def minimum_triangle_total(triangle = list[list[int]]) -> int:
+    rows_count: int = len(triangle)
+    min_sums: list[int] = triangle[-1].copy()
+
+    for i in range(rows_count - 2, -1, -1):
+        for j in range(i + 1):
+            min_sums[j] = min(min_sums[j+1], min_sums[j]) + triangle[i][j]
+    return min_sums[0]
+
