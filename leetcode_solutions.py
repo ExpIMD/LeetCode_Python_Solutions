@@ -211,3 +211,19 @@ def is_palindrome(line: str) -> bool:
     return filtered == filtered[::-1]
 
     """
+
+def Pascal_triangle(rows_count: int) -> list[list[int]]:
+    """
+    Description:
+        Given an integer <rows_count>
+        Returns Pascal's triangle with <rows_count> rows
+    """
+
+    result = [] # Initialize the Pascal triangle
+
+    for i in range(rows_count):
+        result.append([1] * (i + 1)) # All elements are set to 1 by default to avoid having to specify additional conditions
+        for j in range(1, i):
+            result[i][j] = result[i-1][j] + result[i-1][j-1] # Element storage rule
+
+    return result
