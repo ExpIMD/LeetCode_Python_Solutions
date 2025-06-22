@@ -1,4 +1,4 @@
 import leetcode_solutions
 
-psctri = leetcode_solutions.Pascal_triangle(5)
+psctri = leetcode_solutions.get_Pascal_triangle_row(5)
 print(psctri)

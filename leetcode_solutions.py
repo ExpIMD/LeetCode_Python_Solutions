@@ -3,8 +3,8 @@ import typing
 def two_sum(numbers: list[int], target: int) -> tuple[int, int]:
     """
     Description:
-        Given a list of integers %numbers% and an integer %target%
-        Returns a tuple of two indices of elements in a list whose sum equals the %target%
+        Given a list of integers \<numbers\> and an integer \<target\>
+        Returns a tuple of two indices of elements in a list whose sum equals the \<target\>
         If there is no solution, then returns a tuple of two zeros
     """
 
@@ -29,12 +29,12 @@ def two_sum(numbers: list[int], target: int) -> tuple[int, int]:
 def search_insert_position(lst: list[object], target: object) -> int:
     """
     Description:
-        Given a sorted list %lst% and a value %target%
-        Returns the index of %target% in %lst% if it exists
+        Given a sorted list \<lst\> and a value \<target\>
+        Returns the index of \<target\> in \<lst\> if it exists
         Otherwise, returns the index where <target> would theoretically be inserted to maintain sorted order
 
     Note:
-        The objects in %lst% and %target% must support the '<' operator.
+        The objects in \<lst\> and \<target\> must support the '<' operator.
     """
     left: int = 0
     right: int = len(lst)
@@ -60,12 +60,12 @@ def search_insert_position(lst: list[object], target: object) -> int:
 def binary_search(lst: list[object], target: object) -> int:
     """
     Description:
-        Given a sorted list %lst% and a value %target%
-        Returns the index of %target% in %lst% if it exists
+        Given a sorted list \<lst\> and a value \<target\>
+        Returns the index of \<target\> in \<lst\> if it exists
         Otherwise, returns -1
 
     Note:
-        The objects in %lst% and %target% must support the '<' operator.
+        The objects in \<lst\> and \<target\> must support the '<' operator.
     """
     left: int = 0
     right: int = len(lst)
@@ -89,10 +89,11 @@ def binary_search(lst: list[object], target: object) -> int:
 
 def sign(number: int) -> int:
     """
-    Sign math function  
-    If the number is positive, it returns 1     
-    If the number is negative, it returns -1    
-    Otherwise, it returns 0
+    Description:
+        Sign math function  
+        If the number is positive, it returns 1     
+        If the number is negative, it returns -1    
+        Otherwise, it returns 0
     """
     if number > 0:
         return 1
@@ -103,15 +104,17 @@ def sign(number: int) -> int:
 
 def reversed(number: int) -> int:
     """
-    Given an interger %number%  
-    Returns the reversed number
+    Description:
+        Given an interger \<number\>  
+        Returns the reversed \<number\>
     """
     return sign(number)*int(str(abs(number))[::-1])
 
 def last_word_length(line: str) -> int:
     """
-    Given a string %line%   
-    Returns the length of the last word in %line%
+    Description:
+        Given a string \<line\>
+        Returns the length of the last word in \<line\>
     """
     end: int = len(line) - 1
 
@@ -130,9 +133,10 @@ def last_word_length(line: str) -> int:
 
 def Boyer_Moore_vote_algorithm(collection: typing.Iterable[object]) -> object:
     """
-    Given a collection <col>
-    Returns the element that occurs more than half of the time in the collection (the majority element)
-    If there is no majority element, a random element is returned
+    Description:
+        Given a collection \<collection\>
+        Returns the element that occurs more than half of the time in the \<collection\> (the majority element)
+        If there is no majority element, a random element is returned
     """
 
     """
@@ -154,9 +158,10 @@ def Boyer_Moore_vote_algorithm(collection: typing.Iterable[object]) -> object:
 
 def majority_element(collection: typing.Iterable[object]) -> object:
     """
-    Given a collection <collection>
-    Returns the element that occurs more than half of the time in the collection (the majority element)
-    If there is no majority element, returns None
+    Description:
+        Given a collection \<collection\>
+        Returns the element that occurs more than half of the time in the \<collection\> (the majority element)
+        If there is no majority element, returns None
     """
     mapping = {}
     times: int = len(collection) / 2
@@ -171,8 +176,8 @@ def majority_element(collection: typing.Iterable[object]) -> object:
 def is_palindrome(number: int) -> bool:
     """
     Description:
-        Given an integer <number>
-        Checks if the <number> is a palindrome
+        Given an integer \<number\>
+        Checks if the \<number\> is a palindrome
     """
     if number < 0: return False
     return reversed(number) == number
@@ -180,8 +185,8 @@ def is_palindrome(number: int) -> bool:
 def is_palindrome(line: str) -> bool:
     """
     Description:
-        Given a string <line>
-        Checks if the <line> is a palindrome
+        Given a string \<line\>
+        Checks if the \<line\> is a palindrome
     """
 
     if not line: # We will consider the empty string as a palindrome
@@ -215,11 +220,11 @@ def is_palindrome(line: str) -> bool:
 def Pascal_triangle(rows_count: int) -> list[list[int]]:
     """
     Description:
-        Given an integer <rows_count>
-        Returns Pascal's triangle with <rows_count> rows
+        Given an integer \<rows_count\>
+        Returns Pascal's triangle with \<rows_count\> rows
     """
 
-    result = [] # Initialize the Pascal triangle
+    result: list[list[int]]  = [] # Initialize the Pascal triangle
 
     for i in range(rows_count):
         result.append([1] * (i + 1)) # All elements are set to 1 by default to avoid having to specify additional conditions
@@ -227,3 +232,19 @@ def Pascal_triangle(rows_count: int) -> list[list[int]]:
             result[i][j] = result[i-1][j] + result[i-1][j-1] # Element storage rule
 
     return result
+
+def get_Pascal_triangle_row(row_index: int) -> list[int]:
+    """
+    Description:
+        Given an integer \<row_index\>
+        Returns Pascal's triangle row with \<row_index\> index
+    """
+
+    row: list[int] = [1] * (row_index + 1) # Initialize the Pascal triangle row
+
+    # Compute the internal elements of the row (excluding the edges)
+	# Update elements from right to left to avoid overwriting values that are still needed for calculations
+    for i in range(1, row_index):
+        for j in range(i, 0, -1):
+            row[j] += row[j-1]
+    return row
