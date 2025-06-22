@@ -250,6 +250,14 @@ def get_Pascal_triangle_row(row_index: int) -> list[int]:
     return row
 
 def minimum_triangle_total(triangle = list[list[int]]) -> int:
+    """
+    Description:
+        Given a list \<triangle\>
+        For each step, you may move to an adjacent number of the row below.
+        More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row
+        Returns the minimum path sum from top to bottom
+    """
+
     rows_count: int = len(triangle)
     min_sums: list[int] = triangle[-1].copy()
 
@@ -258,3 +266,57 @@ def minimum_triangle_total(triangle = list[list[int]]) -> int:
             min_sums[j] = min(min_sums[j+1], min_sums[j]) + triangle[i][j]
     return min_sums[0]
 
+
+def longest_common_prefix_sort(lines: list[str]) -> str:
+    """
+    Description:
+        Given a list of strings \<lines\>.
+        Returns the longest common prefix of all strings in the list.
+        If there is no common prefix or the list is empty, returns an empty string "".
+    Note:
+        The solution uses lexicographical sorting
+    """
+
+    if len(lines) == 0:
+        return ""
+    
+    # Sort the list lexicographically
+    # After sorting, the strings with similar prefixes will be grouped together
+    lines.sort()
+    k = min(lines[0], lines[-1])
+
+    # Compare characters of the first and last strings to find the common prefix
+    for i in range(k):
+        if lines[0][i] != lines[-1][i]:
+            return lines[0][:i] # Return the prefix up to the point where mismatch occurs
+    
+    return lines[0][:k] # # If no mismatch found, entire shortest string is a common prefix
+
+def longest_common_prefix_char_comparison(lines: list[str]) -> str:
+    """
+    Description:
+        Given a list of strings \<lines\>.
+        Returns the longest common prefix of all strings in the list.
+        If there is no common prefix or the list is empty, returns an empty string "".
+    Note:
+        The solution compares all the strings in the list character by character
+    """
+    
+    if len(lines) == 0:
+        return ""
+    
+    prefix = lines[0] # Let's assume that the first line is the desired prefix
+    for i in range(1, len(lines)): # Iterate through each subsequent string in the list
+        k = min(len(prefix), len(lines[i]))
+
+        for j in range(k): # Compare characters one by one to find where they differ
+            if prefix[j] != lines[i][j]:
+                k = j # Mismatch found, update k to current position j
+                break
+
+        prefix = lines[i][:k] # Update prefix to be only the common part with current string
+        
+        if not prefix: # If at any point, prefix becomes empty, no need to continue further
+            break
+                
+    return prefix
