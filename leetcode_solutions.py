@@ -290,7 +290,7 @@ def longest_common_prefix_sort(lines: list[str]) -> str:
         if lines[0][i] != lines[-1][i]:
             return lines[0][:i] # Return the prefix up to the point where mismatch occurs
     
-    return lines[0][:k] # # If no mismatch found, entire shortest string is a common prefix
+    return lines[0][:k] # If no mismatch found, entire shortest string is a common prefix
 
 def longest_common_prefix_char_comparison(lines: list[str]) -> str:
     """
@@ -314,9 +314,30 @@ def longest_common_prefix_char_comparison(lines: list[str]) -> str:
                 k = j # Mismatch found, update k to current position j
                 break
 
-        prefix = lines[i][:k] # Update prefix to be only the common part with current string
-        
-        if not prefix: # If at any point, prefix becomes empty, no need to continue further
+        prefix = lines[i][:k] # Update prefix to be only the common part with current string. Inefficient in terms of memory
+
+        if not prefix: # If the common prefix becomes empty, no need to continue further
             break
                 
     return prefix
+
+def max_profit(prices: list[int]) -> int:
+    """
+    Description:
+        Given a list of numbers \<prices\> where prices[i] is the price of a given stock on the ith day
+        The goal is to find the maximum profit that can be achieved by buying a stock on one day and selling it on a later day.
+        Returns the maximum profit you can achieve from this transaction
+        If no profit is possible (i.e., prices only decrease or stay the same), the result should be 0.
+    """
+    
+    price_min = prices[0] # 
+    result = 0 # Initialize the result as 0, since the maximum profit cannot be negative
+    for x in prices:
+        if x < price_min:
+            price_min = x # Let's update price_min to a lower value. The profit only increases because x - new_price_min > x - old_price_min
+        # Keeping old prices (higher) does not make sense - they cannot lead to higher profits than the current minimum
+
+        if x - price_min < result: # Update result
+            result = x - price_min
+
+    return result
